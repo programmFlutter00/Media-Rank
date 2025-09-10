@@ -1,3 +1,4 @@
+
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
   bool _showAppBar = false;
-  final double _inputSectionHeight = 460;
+  final double _inputSectionHeight = 410;
 
   @override
   void initState() {
@@ -31,7 +32,8 @@ class _HomePageState extends State<HomePage> {
     _scrollController.addListener(() {
       if (_scrollController.offset > _inputSectionHeight && !_showAppBar) {
         setState(() => _showAppBar = true);
-      } else if (_scrollController.offset <= _inputSectionHeight && _showAppBar) {
+      } else if (_scrollController.offset <= _inputSectionHeight &&
+          _showAppBar) {
         setState(() => _showAppBar = false);
       }
     });
@@ -70,7 +72,9 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => const SearchPage()),
+                            MaterialPageRoute(
+                              builder: (_) => const SearchPage(),
+                            ),
                           );
                         },
                         child: Container(
@@ -86,7 +90,10 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(width: 10),
                               Text(
                                 "Search MAHL",
-                                style: TextStyle(color: Colors.black, fontSize: 16),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
                               ),
                             ],
                           ),
@@ -163,8 +170,16 @@ class _HomePageState extends State<HomePage> {
               left: 0,
               right: 0,
               child: Container(
-                color: Colors.black87,
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                // color: Colors.black87,
+                color: Color(0xFF2E3440),
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(
+                    context,
+                  ).padding.top, // status bar uchun joy
+                  left: 8,
+                  right: 8,
+                  bottom: 8,
+                ),
                 child: Row(
                   children: [
                     Expanded(
@@ -172,23 +187,28 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => const SearchPage()),
+                            MaterialPageRoute(
+                              builder: (_) => const SearchPage(),
+                            ),
                           );
                         },
                         child: Container(
-                          height: 45,
+                          height: 55,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Row(
                             children: const [
                               Icon(Icons.search, color: Colors.black),
-                              SizedBox(width: 8),
+                              SizedBox(width: 10),
                               Text(
                                 "Search MAHL",
-                                style: TextStyle(color: Colors.black, fontSize: 16),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
                               ),
                             ],
                           ),
@@ -216,7 +236,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
 
 //
 /// 🔹 1) News (butun ekran eni card + horizontal scroll)
@@ -770,3 +789,4 @@ class SectionTitle extends StatelessWidget {
     );
   }
 }
+
