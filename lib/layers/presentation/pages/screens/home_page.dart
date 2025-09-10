@@ -39,33 +39,37 @@ class HomeTab extends StatelessWidget {
           child: NewsCharacters(),
         ),
 
-        SizedBox(height: 20),
+        SizedBox(height: 15),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 12),
           child: TextFormField(
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.white12, // fon rangi
+              fillColor: Colors.white12,
               hintText: "Search anime...",
               hintStyle: const TextStyle(color: Colors.white70),
               prefixIcon: const Icon(Icons.search, color: Colors.white70),
+              prefixIconConstraints: const BoxConstraints(
+                minHeight: 50,
+                minWidth: 50,
+              ),
               contentPadding: const EdgeInsets.symmetric(
-                vertical: 0,
+                vertical: 15, // bu matnni vertikal markazga olib keladi
                 horizontal: 16,
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
               ),
             ),
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 15),
 
         Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
