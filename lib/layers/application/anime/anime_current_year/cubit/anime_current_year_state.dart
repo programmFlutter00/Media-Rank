@@ -1,30 +1,30 @@
-part of 'anime_cubit.dart';
+part of 'anime_current_year_cubit.dart';
 
-enum AnimeStatus { initial, loading, success, failed }
+enum AnimeCurrentYearStatus { initial, loading, success, failed }
 
-class AnimeState extends Equatable {
-  const AnimeState({
-    this.status = AnimeStatus.initial,
+class AnimeCurrentYearState extends Equatable {
+  const AnimeCurrentYearState({
+    this.status = AnimeCurrentYearStatus.initial,
     this.animeList = const [],
     this.error,
     this.currentPage = 0,
     this.hasMore = true,
   });
 
-  final AnimeStatus status;
+  final AnimeCurrentYearStatus status;
   final List<AnimeEntity> animeList;
   final String? error;
   final int currentPage;
   final bool hasMore;
 
-  AnimeState copyWith({
-    AnimeStatus? status,
+  AnimeCurrentYearState copyWith({
+    AnimeCurrentYearStatus? status,
     List<AnimeEntity>? animeList,
     String? error,
     int? currentPage,
     bool? hasMore,
   }) {
-    return AnimeState(
+    return AnimeCurrentYearState(
       status: status ?? this.status,
       animeList: animeList ?? this.animeList,
       error: error ?? this.error,

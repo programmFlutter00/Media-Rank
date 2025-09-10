@@ -4,8 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_anime_hero_list/core/di/di.dart';
-import 'package:my_anime_hero_list/layers/application/anime/cubit/anime_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/character/cubit/character_cubit.dart';
+import 'package:my_anime_hero_list/layers/application/anime/anime_current_year/cubit/anime_current_year_cubit.dart';
+import 'package:my_anime_hero_list/layers/application/anime/anime_upcoming/cubit/anime_upcoming_cubit.dart';
+import 'package:my_anime_hero_list/layers/application/character/character_popular/cubit/character_cubit.dart';
 import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
 import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
 import 'package:my_anime_hero_list/layers/presentation/pages/details/anime_detail_page.dart';
@@ -138,10 +139,10 @@ class _NewsCharactersState extends State<NewsCharacters> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<AnimeCubit>()..getUpcoming(type: 'upcoming', page: 1),
-      child: BlocBuilder<AnimeCubit, AnimeState>(
+      create: (_) => sl<AnimeUpcomingCubit>()..getUpcoming(page: 1),
+      child: BlocBuilder<AnimeUpcomingCubit, AnimeUpcomingState>(
         builder: (context, state) {
-          if (state.status == AnimeStatus.loading) {
+          if (state.status == AnimeUpcomingStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state.animeList.isNotEmpty) {
             final anime = state.animeList;
@@ -175,27 +176,43 @@ class PopularCharacters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<CharacterCubit>()..getCharacters("popular", page: 1),
+      create: (_) => sl<CharacterCubit>()..getPopularCharacters(page: 1),
       child: BlocBuilder<CharacterCubit, CharacterState>(
         builder: (context, state) {
-          if (state.status == CharacterStatus.loading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state.characters.isNotEmpty) {
-            final characters = state.characters;
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: characters.length,
-              itemBuilder: (_, i) =>
-                  CharacterCard(character: characters[i], type: 'pop'),
-            );
-          } else {
-            return const Center(child: Text("No data"));
+          switch (state.status) {
+            case CharacterStatus.loading:
+              return const Center(child: CircularProgressIndicator());
+
+            case CharacterStatus.failed:
+              return Center(
+                child: Text(
+                  state.error ?? "Something went wrong",
+                  style: const TextStyle(color: Colors.red),
+                ),
+              );
+
+            case CharacterStatus.success:
+              if (state.characters.isEmpty) {
+                return const Center(child: Text("No characters found"));
+              }
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: state.characters.length,
+                itemBuilder: (_, i) => CharacterCard(
+                  character: state.characters[i],
+                  type: 'pop',
+                ),
+              );
+
+            default:
+              return const SizedBox.shrink();
           }
         },
       ),
     );
   }
 }
+
 
 //
 /// 🔹 3) Current (xuddi Popular bilan bir xil)
@@ -206,10 +223,12 @@ class CurrentCharacters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<AnimeCubit>()..getUpcoming(type: 'now', page: 1),
-      child: BlocBuilder<AnimeCubit, AnimeState>(
+      // create: (_) => sl<AnimeUpcomingCubit>()..getUpcoming(type: 'now', page: 1),
+      create: (_) => sl<AnimeCurrentYearCubit>()..getCurrentYearAnime(page: 1),
+
+      child: BlocBuilder<AnimeCurrentYearCubit, AnimeCurrentYearState>(
         builder: (context, state) {
-          if (state.status == AnimeStatus.loading) {
+          if (state.status == AnimeCurrentYearStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state.animeList.isNotEmpty) {
             final anime = state.animeList;
@@ -236,33 +255,49 @@ class AverageCharacters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<CharacterCubit>()..getCharacters("average", page: 3),
+      create: (_) => sl<CharacterCubit>()..getCharacters(page: 3),
       child: BlocBuilder<CharacterCubit, CharacterState>(
         builder: (context, state) {
-          if (state.status == CharacterStatus.loading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state.characters.isNotEmpty) {
-            final characters = state.characters;
-            return GridView.builder(
-              padding: const EdgeInsets.all(8),
-              physics: const NeverScrollableScrollPhysics(), // 👈 scroll yo'q
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.63,
-              ),
-              itemCount: characters.length,
-              itemBuilder: (_, i) =>
-                  CharacterCard(character: characters[i], type: 'ave'),
-            );
-          } else {
-            return const Center(child: Text("No data"));
+          switch (state.status) {
+            case CharacterStatus.loading:
+              return const Center(child: CircularProgressIndicator());
+
+            case CharacterStatus.failed:
+              return Center(
+                child: Text(
+                  state.error ?? "Something went wrong",
+                  style: const TextStyle(color: Colors.red),
+                ),
+              );
+
+            case CharacterStatus.success:
+              if (state.characters.isEmpty) {
+                return const Center(child: Text("No characters found"));
+              }
+              return GridView.builder(
+                padding: const EdgeInsets.all(8),
+                physics: const NeverScrollableScrollPhysics(), // 👈 scroll yo‘q
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.63,
+                ),
+                itemCount: state.characters.length,
+                itemBuilder: (_, i) => CharacterCard(
+                  character: state.characters[i],
+                  type: 'ave',
+                ),
+              );
+
+            default:
+              return const SizedBox.shrink();
           }
         },
       ),
     );
   }
 }
+
 
 class BigCharacterCard extends StatelessWidget {
   final AnimeEntity anime;

@@ -7,34 +7,34 @@ class CharacterService {
   final Dio _dio;
 
   /// Get characters for different sections
-  Future<Either<String, List<CharacterEntity>>> getCharacters({
-    required String type, // news, popular, current, average
+  Future<Either<String, List<CharacterEntity>>> getPopuarCharacters({
     int page = 1,
     int limit = 20,
   }) async {
     try {
-      String endpoint = '';
-      Map<String, dynamic> queryParams = {'page': page, 'limit': limit};
+      // String endpoint = '';
+      // Map<String, dynamic> queryParams = {'page': page, 'limit': limit};
 
-      switch (type) {
-        case 'popular':
-          endpoint = '/top/characters'; // eng mashhur personajlar
-          break;
-        case 'current':
-          endpoint = '/seasons/now'; // hozirgi yil animelari
-          break;
-        case 'average':
-          endpoint = '/characters'; // past reytingli personajlar
-          queryParams.addAll({
-            'order_by': 'favorites',
-            'sort': 'desc', // yuqoridan pastga qarab
-          });
-          break;
-        default:
-          endpoint = '/characters';
-      }
+      // switch (type) {
+      //   case 'popular':
+      //     endpoint = '/top/characters'; // eng mashhur personajlar
+      //     break;
+      //   case 'average':
+      //     endpoint = '/characters'; // past reytingli personajlar
+      //     queryParams.addAll({
+      //       'order_by': 'favorites',
+      //       'sort': 'desc', // yuqoridan pastga qarab
+      //     });
+      //     break;
+      //   default:
+      //     endpoint = '/characters';
+      // }
 
-      final response = await _dio.get(endpoint, queryParameters: queryParams);
+      // final response = await _dio.get(endpoint, queryParameters: queryParams);
+      final response = await _dio.get(
+        '/top/characters',
+        queryParameters: {'page': page, 'limit': limit},
+      );
 
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data['data'] ?? [];
@@ -43,7 +43,7 @@ class CharacterService {
             .toList();
         return Right(characters);
       } else {
-        return Left('Failed to fetch $type');
+        return Left('Failed to fetch ');
       }
     } on DioException catch (e) {
       String errorMessage = 'Network error occurred';
@@ -57,7 +57,46 @@ class CharacterService {
     }
   }
 
-  
+  Future<Either<String, List<CharacterEntity>>> getCharacters({
+    int page = 1,
+    int limit = 20,
+  }) async {
+    try {
+      // Map<String, dynamic> queryParams = {'page': page, 'limit': limit};
+      // String endpoint = '/characters';
+      // queryParams.addAll({'order_by': 'favorites', 'sort': 'desc'});
+
+      // final response = await _dio.get(endpoint, queryParameters: queryParams);
+      final response = await _dio.get(
+        '/characters',
+        queryParameters: {
+          'page': page,
+          'limit': limit,
+          'order_by': 'favorites',
+          'sort': 'desc',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data['data'] ?? [];
+        final characters = data
+            .map((c) => CharacterEntity.fromJson(c))
+            .toList();
+        return Right(characters);
+      } else {
+        return Left('Failed to fetch');
+      }
+    } on DioException catch (e) {
+      String errorMessage = 'Network error occurred';
+      if (e.response != null) {
+        errorMessage =
+            'API Error: ${e.response?.statusCode} - ${e.response?.statusMessage}';
+      }
+      return Left(errorMessage);
+    } catch (e) {
+      return Left('Unexpected error: $e');
+    }
+  }
 
   /// Search characters
   Future<Either<String, List<CharacterEntity>>> searchCharacters({

@@ -30,12 +30,23 @@ class CharacterRepositoryImpl implements CharacterRepository {
   
 
   @override
-  Future<Either<String, List<CharacterEntity>>> getCharacters({
-    String type = 'popular',
+  Future<Either<String, List<CharacterEntity>>> getPopularCharacters({
     int page = 1,
     int limit = 20,
   }) async {
-    final result = await service.getCharacters(type: type, page: page, limit: limit);
+    final result = await service.getPopuarCharacters(page: page, limit: limit);
+    return result.fold(
+      (l) => Left(l),
+      (r) => Right(r), // r – CharacterResponse
+    );
+  }
+
+  @override
+  Future<Either<String, List<CharacterEntity>>> getCharacters({
+    int page = 1,
+    int limit = 20,
+  }) async {
+    final result = await service.getCharacters( page: page, limit: limit);
     return result.fold(
       (l) => Left(l),
       (r) => Right(r), // r – CharacterResponse

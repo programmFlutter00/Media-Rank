@@ -7,6 +7,10 @@ class AnimeUsecase {
   AnimeUsecase(this.repository);
 
   Future<Either<String, List<AnimeEntity>>> getUpcoming({String type = 'upcoming', int page = 1, int limit = 20}) {
-    return repository.getUpcoming(type: type, page: page, limit: limit);
+    return repository.getUpcoming(page: page, limit: limit);
+  }
+
+    Future<Either<String, List<AnimeEntity>>> getCurrentYearAnime({int page = 1, int limit = 20}) {
+    return repository.getCurrentYearAnime(page: page, limit: limit);
   }
 }

@@ -3,26 +3,26 @@ import 'package:equatable/equatable.dart';
 import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
 import 'package:my_anime_hero_list/layers/domain/usecases/anime_usecase.dart';
 
-part 'anime_state.dart';
+part 'anime_upcoming_state.dart';
 
-class AnimeCubit extends Cubit<AnimeState> {
+class AnimeUpcomingCubit extends Cubit<AnimeUpcomingState> {
   final AnimeUsecase _usecase;
-  AnimeCubit(this._usecase) : super(const AnimeState());
+  AnimeUpcomingCubit(this._usecase) : super(const AnimeUpcomingState());
 
-  Future<void> getUpcoming({String type = 'upcoming',int page = 1}) async {
+  Future<void> getUpcoming({int page = 1}) async {
     if (page == 1) {
-      emit(state.copyWith(status: AnimeStatus.loading, error: null));
+      emit(state.copyWith(status: AnimeUpcomingStatus.loading, error: null));
     }
 
-    final result = await _usecase.getUpcoming(type: type, page: page);
+    final result = await _usecase.getUpcoming(page: page);
 
     result.fold(
-      (error) => emit(state.copyWith(status: AnimeStatus.failed, error: error)),
+      (error) => emit(state.copyWith(status: AnimeUpcomingStatus.failed, error: error)),
       (list) {
         final merged = page == 1 ? list : [...state.animeList, ...list];
         final hasMore = list.length >= 20; // limit=20
         emit(state.copyWith(
-          status: AnimeStatus.success,
+          status: AnimeUpcomingStatus.success,
           animeList: merged,
           currentPage: page,
           hasMore: hasMore,

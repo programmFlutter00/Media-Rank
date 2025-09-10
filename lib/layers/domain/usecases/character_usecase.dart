@@ -24,12 +24,18 @@ class CharacterUsecase {
   final CharacterRepository repository;
   const CharacterUsecase(this.repository);
 
-  Future<Either<String, List<CharacterEntity>>> call({
-    String type = 'popular',
+ Future<Either<String, List<CharacterEntity>>> getPopularCharacters({
     int page = 1,
     int limit = 20,
   }) {
-    return repository.getCharacters(type: type, page: page, limit: limit);
+    return repository.getPopularCharacters(page: page, limit: limit);
+  }
+
+  Future<Either<String, List<CharacterEntity>>> getCharacters({
+    int page = 1,
+    int limit = 20,
+  }) {
+    return repository.getCharacters(page: page, limit: limit);
   }
 
   Future<Either<String, List<CharacterEntity>>> searchCharacters(
