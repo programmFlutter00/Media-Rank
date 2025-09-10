@@ -38,21 +38,34 @@ class HomeTab extends StatelessWidget {
           decoration: BoxDecoration(color: Colors.white10),
           child: NewsCharacters(),
         ),
-        
-        SizedBox(height: 20,),
+
+        SizedBox(height: 20),
         Padding(
-          padding:  EdgeInsets.symmetric(horizontal:  14),
+          padding: EdgeInsets.symmetric(horizontal: 12),
           child: TextFormField(
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              enabledBorder: OutlineInputBorder(),
-              focusedErrorBorder: OutlineInputBorder(),
-              disabledBorder: OutlineInputBorder(),
-              errorBorder: OutlineInputBorder()
+              filled: true,
+              fillColor: Colors.white12, // fon rangi
+              hintText: "Search anime...",
+              hintStyle: const TextStyle(color: Colors.white70),
+              prefixIcon: const Icon(Icons.search, color: Colors.white70),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 0,
+                horizontal: 16,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
+              ),
             ),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
-        SizedBox(height:  20),
+        SizedBox(height: 20),
 
         Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
@@ -207,10 +220,8 @@ class PopularCharacters extends StatelessWidget {
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state.characters.length,
-                itemBuilder: (_, i) => CharacterCard(
-                  character: state.characters[i],
-                  type: 'pop',
-                ),
+                itemBuilder: (_, i) =>
+                    CharacterCard(character: state.characters[i], type: 'pop'),
               );
 
             default:
@@ -221,7 +232,6 @@ class PopularCharacters extends StatelessWidget {
     );
   }
 }
-
 
 //
 /// 🔹 3) Current (xuddi Popular bilan bir xil)
@@ -292,10 +302,8 @@ class AverageCharacters extends StatelessWidget {
                   childAspectRatio: 0.63,
                 ),
                 itemCount: state.characters.length,
-                itemBuilder: (_, i) => CharacterCard(
-                  character: state.characters[i],
-                  type: 'ave',
-                ),
+                itemBuilder: (_, i) =>
+                    CharacterCard(character: state.characters[i], type: 'ave'),
               );
 
             default:
@@ -306,7 +314,6 @@ class AverageCharacters extends StatelessWidget {
     );
   }
 }
-
 
 class BigCharacterCard extends StatelessWidget {
   final AnimeEntity anime;
@@ -461,8 +468,12 @@ class CurrentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AnimeDetailPage(anime: anime)));
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => AnimeDetailPage(anime: anime),
+          ),
+        );
       },
       child: Container(
         margin: const EdgeInsets.all(12),
@@ -482,7 +493,7 @@ class CurrentCard extends StatelessWidget {
             },
           ),
         ),
-      
+
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -512,7 +523,7 @@ class CurrentCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
-      
+
               Row(
                 children: [
                   // Rating
@@ -580,8 +591,12 @@ class CharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CharacterDetailPage(character: character)));
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CharacterDetailPage(character: character),
+          ),
+        );
       },
       child: Card(
         color: Colors.transparent,
@@ -615,7 +630,7 @@ class CharacterCard extends StatelessWidget {
                   children: [
                     Text(
                       character.name,
-      
+
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
