@@ -11,121 +11,212 @@ import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
 import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
 import 'package:my_anime_hero_list/layers/presentation/pages/details/anime_detail_page.dart';
 import 'package:my_anime_hero_list/layers/presentation/pages/details/character_detail_page.dart';
+import 'package:my_anime_hero_list/layers/presentation/pages/screens/search_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showAppBar = false;
+  final double _inputSectionHeight = 460;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.offset > _inputSectionHeight && !_showAppBar) {
+        setState(() => _showAppBar = true);
+      } else if (_scrollController.offset <= _inputSectionHeight && _showAppBar) {
+        setState(() => _showAppBar = false);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text("Anime Explorer")),
-      body: const HomeTab(),
-    );
-  }
-}
-
-/// Asosiy Home Tab
-class HomeTab extends StatelessWidget {
-  const HomeTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          height: 390,
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          decoration: BoxDecoration(color: Colors.white10),
-          child: NewsCharacters(),
-        ),
-
-        SizedBox(height: 15),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: TextFormField(
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white12,
-              hintText: "Search anime...",
-              hintStyle: const TextStyle(color: Colors.white70),
-              prefixIcon: const Icon(Icons.search, color: Colors.white70),
-              prefixIconConstraints: const BoxConstraints(
-                minHeight: 50,
-                minWidth: 50,
+      body: Stack(
+        children: [
+          ListView(
+            controller: _scrollController,
+            children: [
+              // 🔹 Asl widgetlar ishlaydi
+              Container(
+                height: 390,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(color: Colors.white10),
+                child: const NewsCharacters(),
               ),
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 15, // bu matnni vertikal markazga olib keladi
-                horizontal: 16,
+
+              const SizedBox(height: 5),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const SearchPage()),
+                          );
+                        },
+                        child: Container(
+                          height: 55,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            children: const [
+                              Icon(Icons.search, color: Colors.black),
+                              SizedBox(width: 10),
+                              Text(
+                                "Search MAHL",
+                                style: TextStyle(color: Colors.black, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.person, color: Colors.black),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
+
+              const SizedBox(height: 5),
+
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(color: Colors.white10),
+                height: 350,
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SectionTitle(title: "Current Year Anime"),
+                    SizedBox(height: 8),
+                    Expanded(child: CurrentCharacters()),
+                  ],
+                ),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
+
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(color: Colors.white10),
+                height: 350,
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SectionTitle(title: "Popular Characters"),
+                    SizedBox(height: 8),
+                    Expanded(child: PopularCharacters()),
+                  ],
+                ),
+              ),
+
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                decoration: BoxDecoration(color: Colors.white10),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SectionTitle(title: "Average Rating"),
+                    SizedBox(height: 8),
+                    AverageCharacters(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          if (_showAppBar)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.black87,
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const SearchPage()),
+                          );
+                        },
+                        child: Container(
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Row(
+                            children: const [
+                              Icon(Icons.search, color: Colors.black),
+                              SizedBox(width: 8),
+                              Text(
+                                "Search MAHL",
+                                style: TextStyle(color: Colors.black, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.person, color: Colors.black),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            style: const TextStyle(color: Colors.white, fontSize: 16),
-          ),
-        ),
-        SizedBox(height: 15),
-
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: Colors.white10,
-            // borderRadius: BorderRadius.circular(16),
-          ),
-          height: 350,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
-              SectionTitle(title: "Current Year Anime"),
-              SizedBox(height: 8),
-              Expanded(child: CurrentCharacters()),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: Colors.white10,
-            // borderRadius: BorderRadius.circular(16),
-          ),
-          height: 350,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
-              SectionTitle(title: "Popular Characters"),
-              SizedBox(height: 8),
-              Expanded(child: PopularCharacters()),
-            ],
-          ),
-        ),
-
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: Colors.white10,
-            // borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
-              SectionTitle(title: "Average Rating"),
-              SizedBox(height: 8),
-              AverageCharacters(),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
+
 
 //
 /// 🔹 1) News (butun ekran eni card + horizontal scroll)
