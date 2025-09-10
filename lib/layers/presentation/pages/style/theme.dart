@@ -70,14 +70,14 @@ class AppTheme {
       onError: Colors.white,
     ),
     appBarTheme: const AppBarTheme(
-      elevation: 0,
-      scrolledUnderElevation: 1,
+      elevation: 3,
+      scrolledUnderElevation: 0,
       backgroundColor: Color(0xFF2E3440),
       foregroundColor: Colors.white,
       titleTextStyle: TextStyle(
         color: Colors.white,
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
       ),
       iconTheme: IconThemeData(color: Colors.white),
     ),

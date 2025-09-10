@@ -32,19 +32,15 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        //  SizedBox(height: 390, child: NewsCharacters()),
-        // SectionTitle(title: "Popular Characters"),
-        // SizedBox(height: 300, child: PopularCharacters()),
-        // SectionTitle(title: "Current Year Anime"),
-        // SizedBox(height: 250, child: CurrentCharacters()),
-        // SectionTitle(title: "Average Rating"),
-        // SizedBox(child: AverageCharacters()),
         Container(
           height: 390,
           margin: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(color: Colors.white10),
           child: NewsCharacters(),
         ),
+        
+        
+
         Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
           padding: const EdgeInsets.symmetric(vertical: 12),

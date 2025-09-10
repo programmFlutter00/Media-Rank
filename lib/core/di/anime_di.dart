@@ -1,5 +1,6 @@
 import 'package:my_anime_hero_list/core/di/di.dart';
 import 'package:my_anime_hero_list/core/network/api_client.dart';
+import 'package:my_anime_hero_list/layers/application/anime/anime_character/cubit/anime_character_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/anime/anime_current_year/cubit/anime_current_year_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/anime/anime_upcoming/cubit/anime_upcoming_cubit.dart';
 import 'package:my_anime_hero_list/layers/data/repositories/anime_repository_impl.dart';
@@ -20,4 +21,5 @@ Future<void> setupAnimeDI() async{
   // Cubit
   sl.registerFactory(() => AnimeUpcomingCubit(sl<AnimeUsecase>()));
   sl.registerFactory(() => AnimeCurrentYearCubit(sl<AnimeUsecase>()));
+  sl.registerFactory(() => AnimeCharacterCubit(sl<AnimeUsecase>()));
 }
