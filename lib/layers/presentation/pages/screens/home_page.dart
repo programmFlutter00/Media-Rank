@@ -39,7 +39,20 @@ class HomeTab extends StatelessWidget {
           child: NewsCharacters(),
         ),
         
-        
+        SizedBox(height: 20,),
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal:  14),
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              enabledBorder: OutlineInputBorder(),
+              focusedErrorBorder: OutlineInputBorder(),
+              disabledBorder: OutlineInputBorder(),
+              errorBorder: OutlineInputBorder()
+            ),
+          ),
+        ),
+        SizedBox(height:  20),
 
         Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
