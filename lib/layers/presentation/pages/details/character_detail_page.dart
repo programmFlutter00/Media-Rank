@@ -12,8 +12,8 @@ class CharacterDetailPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(character.name),
-        centerTitle: true,
+        title: Text('MAHL'),
+        // centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(

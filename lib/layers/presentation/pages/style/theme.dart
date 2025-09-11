@@ -74,6 +74,7 @@ class AppTheme {
       scrolledUnderElevation: 0,
       backgroundColor: Color(0xFF2E3440),
       foregroundColor: Colors.white,
+      centerTitle: true,
       titleTextStyle: TextStyle(
         color: Colors.white,
         fontSize: 22,
