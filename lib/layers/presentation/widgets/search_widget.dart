@@ -22,15 +22,15 @@ class SearchInput extends StatelessWidget {
           minWidth: 50,
         ),
         contentPadding: const EdgeInsets.symmetric(
-          vertical: 16,
+          vertical: 5,
           horizontal: 16,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
         ),
       ),

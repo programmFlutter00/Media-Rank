@@ -6,8 +6,8 @@ import 'package:my_anime_hero_list/layers/application/anime/anime_current_year/c
 import 'package:my_anime_hero_list/layers/application/anime/anime_upcoming/cubit/anime_upcoming_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/character/character_popular/cubit/character_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/theme_cubit.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/main_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/screens/home_page.dart';
+import 'package:my_anime_hero_list/layers/presentation/pages/Main/main_page.dart';
+import 'package:my_anime_hero_list/layers/presentation/pages/home_page.dart';
 import 'package:my_anime_hero_list/layers/presentation/pages/style/theme.dart';
 // import 'package:my_anime_hero_list/layers/presentation/pages/theme_cubit.dart';
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           create: (_) => sl<AnimeCurrentYearCubit>()..getCurrentYearAnime(page: 1,),
         ),
         BlocProvider(
-          create: (_) => sl<AnimeCharacterCubit>()..getCharacters(56),
+          create: (_) => sl<AnimeCharacterCubit>()..getCharacters(6),
         ),
         BlocProvider(
           create: (_) => sl<CharacterCubit>()..getCharacters(page: 1),
