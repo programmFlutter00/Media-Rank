@@ -1,20 +1,31 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_anime_hero_list/core/di/di.dart';
+import 'package:my_anime_hero_list/firebase_options.dart';
 import 'package:my_anime_hero_list/layers/application/anime/anime_character/cubit/anime_character_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/anime/anime_current_year/cubit/anime_current_year_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/anime/anime_upcoming/cubit/anime_upcoming_cubit.dart';
+import 'package:my_anime_hero_list/layers/application/auth/cubit/auth_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/character/character_popular/cubit/character_cubit.dart';
 import 'package:my_anime_hero_list/layers/application/theme_cubit.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/Main/main_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/home_page.dart';
+import 'package:my_anime_hero_list/layers/presentation/pages/splash/splash_page.dart';
 import 'package:my_anime_hero_list/layers/presentation/pages/style/theme.dart';
-// import 'package:my_anime_hero_list/layers/presentation/pages/theme_cubit.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp
+  ]);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await setupSingletons();
   runApp(const MyApp());
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,6 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthCubit>(create: (_) => sl<AuthCubit>()),
          BlocProvider(
           create: (_) => sl<AnimeUpcomingCubit>()..getUpcoming(page: 1,),
         ),
@@ -47,7 +59,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.darkTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: themeMode,
-            home: const HomePage(),
+            home: const SplashPage(),
           );
         },
       ),

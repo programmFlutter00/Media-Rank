@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_anime_hero_list/layers/presentation/pages/profile/profile_page.dart';
 import 'package:my_anime_hero_list/layers/presentation/widgets/appBar/appBar_button.dart';
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       endDrawer: Drawer(
         shape: LinearBorder.none,
@@ -57,19 +59,20 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-              child: const UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color(0xFF2E3440), // 🔹 header fon rangi
-                ),
+              child: UserAccountsDrawerHeader(
+                decoration: const BoxDecoration(color: Color(0xFF2E3440)),
                 accountName: Text(
-                  "John Doe", // 🔹 ism
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  user?.displayName ?? "No Name",
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 accountEmail: Text(
-                  "johndoe@gmail.com", // 🔹 email
-                  style: TextStyle(color: Colors.white70),
+                  user?.email ?? "No Email",
+                  style: const TextStyle(color: Colors.white70),
                 ),
-                currentAccountPicture: CircleAvatar(
+                currentAccountPicture: const CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(Icons.person, size: 40, color: Color(0xFF2E3440)),
                 ),
