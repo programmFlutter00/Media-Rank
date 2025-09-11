@@ -12,26 +12,7 @@ class CharacterService {
     int limit = 20,
   }) async {
     try {
-      // String endpoint = '';
-      // Map<String, dynamic> queryParams = {'page': page, 'limit': limit};
-
-      // switch (type) {
-      //   case 'popular':
-      //     endpoint = '/top/characters'; // eng mashhur personajlar
-      //     break;
-      //   case 'average':
-      //     endpoint = '/characters'; // past reytingli personajlar
-      //     queryParams.addAll({
-      //       'order_by': 'favorites',
-      //       'sort': 'desc', // yuqoridan pastga qarab
-      //     });
-      //     break;
-      //   default:
-      //     endpoint = '/characters';
-      // }
-
-      // final response = await _dio.get(endpoint, queryParameters: queryParams);
-      final response = await _dio.get(
+           final response = await _dio.get(
         '/top/characters',
         queryParameters: {'page': page, 'limit': limit},
       );
@@ -62,11 +43,6 @@ class CharacterService {
     int limit = 20,
   }) async {
     try {
-      // Map<String, dynamic> queryParams = {'page': page, 'limit': limit};
-      // String endpoint = '/characters';
-      // queryParams.addAll({'order_by': 'favorites', 'sort': 'desc'});
-
-      // final response = await _dio.get(endpoint, queryParameters: queryParams);
       final response = await _dio.get(
         '/characters',
         queryParameters: {
