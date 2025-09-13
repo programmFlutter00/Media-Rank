@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_anime_hero_list/layers/application/auth/cubit/auth_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/auth/cubit/auth_state.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/auth/sign_in.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/auth/sign_up_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/home_page.dart';
+import 'package:media_rank/layers/application/auth/cubit/auth_cubit.dart';
+import 'package:media_rank/layers/domain/entities/auth/sign_in.dart';
+import 'package:media_rank/layers/presentation/pages/auth/sign_up_page.dart';
+import 'package:media_rank/layers/presentation/pages/home_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/profile/profile_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/appBar/appBar_button.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/appBar/custom_home_appBer.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/characters/avarage_characters.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/characters/popular_characters.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/current_year/current_year_anime.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/news/news.dart';
+import 'package:media_rank/layers/presentation/pages/admin/admin_page.dart';
+import 'package:media_rank/layers/presentation/pages/profile/profile_page.dart';
+import 'package:media_rank/layers/presentation/widgets/appBar/appBar_button.dart';
+import 'package:media_rank/layers/presentation/widgets/appBar/custom_home_appBer.dart';
+import 'package:media_rank/layers/presentation/widgets/characters/avarage_characters.dart';
+import 'package:media_rank/layers/presentation/widgets/characters/popular_characters.dart';
+import 'package:media_rank/layers/presentation/widgets/current_year/current_year_anime.dart';
+import 'package:media_rank/layers/presentation/widgets/news/news.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -78,9 +79,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const ListTile(
+             ListTile(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminPage())),
               leading: Icon(Icons.home, color: Colors.white),
-              title: Text("Home"),
+              title: Text("Admin"),
             ),
             const ListTile(
               leading: Icon(Icons.favorite, color: Colors.red),

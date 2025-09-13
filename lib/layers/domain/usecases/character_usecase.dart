@@ -1,6 +1,6 @@
 // import 'package:dartz/dartz.dart';
-// import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
-// import 'package:my_anime_hero_list/layers/domain/repositories/character_repository.dart';
+// import 'package:media_rank/layers/domain/entities/character_entity.dart';
+// import 'package:media_rank/layers/domain/repositories/character_repository.dart';
 
 // class CharacterUsecase {
 //     final CharacterRepository repository;
@@ -17,8 +17,8 @@
 // }
 
 import 'package:dartz/dartz.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/repositories/character_repository.dart';
+import 'package:media_rank/layers/domain/entities/character_entity.dart';
+import 'package:media_rank/layers/domain/repositories/character_repository.dart';
 
 class CharacterUsecase {
   final CharacterRepository repository;

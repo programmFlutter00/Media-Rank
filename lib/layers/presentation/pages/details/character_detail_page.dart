@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
+import 'package:media_rank/layers/domain/entities/character_entity.dart';
 
 class CharacterDetailPage extends StatelessWidget {
   final CharacterEntity character;

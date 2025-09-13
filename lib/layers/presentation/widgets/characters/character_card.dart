@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/Details/character_detail_page.dart';
+import 'package:media_rank/layers/domain/entities/character_entity.dart';
+import 'package:media_rank/layers/presentation/pages/Details/character_detail_page.dart';
 
 
 class CharacterCard extends StatelessWidget {

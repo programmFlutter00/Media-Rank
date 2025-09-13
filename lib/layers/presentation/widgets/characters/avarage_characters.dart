@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_anime_hero_list/core/di/di.dart';
-import 'package:my_anime_hero_list/layers/application/character/character_popular/cubit/character_cubit.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/characters/character_card.dart';
+import 'package:media_rank/core/di/di.dart';
+import 'package:media_rank/layers/application/character/character_popular/cubit/character_cubit.dart';
+import 'package:media_rank/layers/presentation/widgets/characters/character_card.dart';
 
 
 
@@ -13,7 +13,7 @@ class AvarageCharacters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<CharacterCubit>()..getCharacters(page: 3),
+      create: (_) => sl<CharacterCubit>()..getCharacters(page: 3,limit: 20),
       child: BlocBuilder<CharacterCubit, CharacterState>(
         builder: (context, state) {
           switch (state.status) {

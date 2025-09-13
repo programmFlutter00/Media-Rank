@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_character_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
+import 'package:media_rank/layers/domain/entities/anime_character_entity.dart';
+import 'package:media_rank/layers/domain/entities/anime_entity.dart';
 
 class AnimeService {
   final Dio _dio;

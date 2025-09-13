@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/usecases/anime_usecase.dart';
+import 'package:media_rank/layers/domain/entities/anime_entity.dart';
+import 'package:media_rank/layers/domain/usecases/anime_usecase.dart';
 
 part 'anime_current_year_state.dart';
 

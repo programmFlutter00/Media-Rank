@@ -1,7 +1,7 @@
 // import 'package:dartz/dartz.dart';
-// import 'package:my_anime_hero_list/layers/data/service/character_service.dart';
-// import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
-// import 'package:my_anime_hero_list/layers/domain/repositories/character_repository.dart';
+// import 'package:media_rank/layers/data/service/character_service.dart';
+// import 'package:media_rank/layers/domain/entities/character_entity.dart';
+// import 'package:media_rank/layers/domain/repositories/character_repository.dart';
 
 // class CharacterRepositoryImpl implements CharacterRepository {
 //   final CharacterService service;
@@ -20,9 +20,9 @@
 // }
 
 import 'package:dartz/dartz.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/repositories/character_repository.dart';
-import 'package:my_anime_hero_list/layers/data/service/character_service.dart';
+import 'package:media_rank/layers/domain/entities/character_entity.dart';
+import 'package:media_rank/layers/domain/repositories/character_repository.dart';
+import 'package:media_rank/layers/data/service/character_service.dart';
 
 class CharacterRepositoryImpl implements CharacterRepository {
   final CharacterService service;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/search_widget.dart';
+import 'package:media_rank/layers/presentation/widgets/search_widget.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});

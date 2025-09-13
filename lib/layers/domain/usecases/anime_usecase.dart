@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_character_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/repositories/anime_repository.dart';
+import 'package:media_rank/layers/domain/entities/anime_character_entity.dart';
+import 'package:media_rank/layers/domain/entities/anime_entity.dart';
+import 'package:media_rank/layers/domain/repositories/anime_repository.dart';
 
 class AnimeUsecase {
   final AnimeRepository repository;

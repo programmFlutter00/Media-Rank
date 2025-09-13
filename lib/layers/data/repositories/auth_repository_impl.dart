@@ -1,26 +1,32 @@
 // layers/data/repository/auth/auth_repository_impl.dart
-import 'package:my_anime_hero_list/layers/data/service/auth_service.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/auth/sign_in.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/auth/sign_up.dart';
-import 'package:my_anime_hero_list/layers/domain/repositories/auth_repository.dart';
+import 'package:media_rank/layers/data/service/auth_service.dart';
+import 'package:media_rank/layers/domain/entities/auth/sign_in.dart';
+import 'package:media_rank/layers/domain/entities/auth/sign_up.dart';
+import 'package:media_rank/layers/domain/entities/auth/user_model.dart';
+import 'package:media_rank/layers/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final AuthService _signUpService;
+  final AuthService _authService;
 
-  AuthRepositoryImpl(this._signUpService);
+  AuthRepositoryImpl(this._authService);
 
   @override
-  Future<bool> signIn(SignIn signIn) async {
-    return await _signUpService.signIn(signIn);
+  Future<UserModel?> signIn(SignIn signIn) async {
+    return await _authService.signIn(signIn);
   }
 
   @override
-  Future<bool> signUp(SignUp signUp) async {
-    return await _signUpService.signUp(signUp);
+  Future<UserModel?> signUp(SignUp signUp) async {
+    return await _authService.signUp(signUp);
   }
 
   @override
   Future<void> signOut() async {
-    return await _signUpService.signOut();
+    return await _authService.signOut();
+  }
+
+  @override
+  Future<UserModel?> getCurrentUser() async {
+    return await _authService.getCurrentUser();
   }
 }

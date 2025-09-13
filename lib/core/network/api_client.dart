@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:my_anime_hero_list/core/constants/api_constants.dart';
+import 'package:media_rank/core/constants/api_constants.dart';
 
 /// HTTP client for API communication
 class ApiClient {

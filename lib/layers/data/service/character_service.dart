@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
+import 'package:media_rank/layers/domain/entities/character_entity.dart';
 
 class CharacterService {
   CharacterService(this._dio);

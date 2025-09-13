@@ -1,9 +1,18 @@
-// layers/domain/repository/auth/auth_repository.dart
-import 'package:my_anime_hero_list/layers/domain/entities/auth/sign_in.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/auth/sign_up.dart';
+// layers/domain/repositories/auth_repository.dart
+import 'package:media_rank/layers/domain/entities/auth/sign_in.dart';
+import 'package:media_rank/layers/domain/entities/auth/sign_up.dart';
+import 'package:media_rank/layers/domain/entities/auth/user_model.dart';
 
 abstract class AuthRepository {
-  Future<bool> signIn(SignIn signIn);
-  Future<bool> signUp(SignUp signUp);
+  /// Foydalanuvchini login qilamiz
+  Future<UserModel?> signIn(SignIn signIn);
+
+  /// Yangi foydalanuvchini ro‘yxatdan o‘tkazamiz
+  Future<UserModel?> signUp(SignUp signUp);
+
+  /// Tizimdan chiqish
   Future<void> signOut();
+
+  /// Hozirgi foydalanuvchini olish (agar mavjud bo‘lsa)
+  Future<UserModel?> getCurrentUser();
 }

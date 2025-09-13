@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/home_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/profile/profile_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/Search/search_page.dart';
+import 'package:media_rank/layers/presentation/pages/home_page.dart';
+import 'package:media_rank/layers/presentation/pages/profile/profile_page.dart';
+import 'package:media_rank/layers/presentation/pages/Search/search_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

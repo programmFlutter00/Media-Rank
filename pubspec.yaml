@@ -1,4 +1,4 @@
-name: my_anime_hero_list
+name: media_rank
 description: "My Anime Hero List - A Flutter app to explore and manage your favorite anime heroes."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

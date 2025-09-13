@@ -1,9 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:my_anime_hero_list/layers/data/service/anime_service.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_character_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/repositories/anime_repository.dart';
+import 'package:media_rank/layers/data/service/anime_service.dart';
+import 'package:media_rank/layers/domain/entities/anime_character_entity.dart';
+import 'package:media_rank/layers/domain/entities/anime_entity.dart';
+import 'package:media_rank/layers/domain/repositories/anime_repository.dart';
 
 class AnimeRepositoryImpl implements AnimeRepository {
   final AnimeService _service;

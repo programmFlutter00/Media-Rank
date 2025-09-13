@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/Search/search_page.dart';
+import 'package:media_rank/layers/presentation/pages/Search/search_page.dart';
 
 class AppbarButton extends StatelessWidget {
   const AppbarButton({super.key});

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_anime_hero_list/layers/application/auth/cubit/auth_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/auth/cubit/auth_state.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/auth/sign_in_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/home_page.dart';
+import 'package:media_rank/layers/application/auth/cubit/auth_cubit.dart';
+import 'package:media_rank/layers/presentation/pages/auth/sign_in_page.dart';
+import 'package:media_rank/layers/presentation/pages/home_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -84,7 +83,7 @@ class _SplashPageState extends State<SplashPage>
                 const SizedBox(height: 32),
                 // 🔹 App nomi
                 const Text(
-                  "My Anime Hero List",
+                  "Media Rank",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,

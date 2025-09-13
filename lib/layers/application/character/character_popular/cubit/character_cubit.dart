@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/character_entity.dart';
-import 'package:my_anime_hero_list/layers/domain/usecases/character_usecase.dart';
+import 'package:media_rank/layers/domain/entities/character_entity.dart';
+import 'package:media_rank/layers/domain/usecases/character_usecase.dart';
 part 'character_state.dart';
 
 class CharacterCubit extends Cubit<CharacterState> {

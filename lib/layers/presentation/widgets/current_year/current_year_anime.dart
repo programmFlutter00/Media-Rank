@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_anime_hero_list/core/di/di.dart';
-import 'package:my_anime_hero_list/layers/application/anime/anime_current_year/cubit/anime_current_year_cubit.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/current_year/current_card.dart';
+import 'package:media_rank/core/di/di.dart';
+import 'package:media_rank/layers/application/anime/anime_current_year/cubit/anime_current_year_cubit.dart';
+import 'package:media_rank/layers/presentation/widgets/current_year/current_card.dart';
 
 
 

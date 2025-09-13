@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_anime_hero_list/layers/application/theme_cubit.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/Profile/update_profile_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/splash/splash_page.dart';
+import 'package:media_rank/layers/application/theme_cubit.dart';
+import 'package:media_rank/layers/presentation/pages/Profile/update_profile_page.dart';
+import 'package:media_rank/layers/presentation/pages/splash/splash_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -16,7 +16,14 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile"),
-        actions: [IconButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => UpdateProfilePage())), icon: Icon(Icons.edit))],
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const UpdateProfilePage()),
+            ),
+            icon: const Icon(Icons.edit),
+          ),
+        ],
       ),
       body: user == null
           ? const Center(child: Text("No user signed in"))
@@ -25,12 +32,21 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   // Avatar
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: user.photoURL != null
-                        ? NetworkImage(user.photoURL!)
-                        : const AssetImage("assets/images/default_avatar.png")
-                            as ImageProvider,
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [Colors.blue.shade400, Colors.purple.shade400],
+                      ),
+                    ),
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundImage: user.photoURL != null
+                          ? NetworkImage(user.photoURL!)
+                          : const AssetImage("assets/images/default_avatar.png")
+                              as ImageProvider,
+                    ),
                   ),
                   const SizedBox(height: 20),
 
@@ -56,43 +72,54 @@ class ProfilePage extends StatelessWidget {
 
                   const SizedBox(height: 30),
 
-                  // Cardlar
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    elevation: 4,
-                    child: ListTile(
-                      leading: const Icon(Icons.dark_mode),
-                      title: const Text("Toggle Dark/Light Mode"),
-                      trailing: Switch(
-                        value: themeCubit.state == ThemeMode.dark,
-                        onChanged: (_) => themeCubit.toggleTheme(),
-                      ),
+                  // Settings cards
+                  _buildCard(
+                    icon: Icons.dark_mode,
+                    title: "Toggle Dark/Light Mode",
+                    trailing: Switch(
+                      value: themeCubit.state == ThemeMode.dark,
+                      onChanged: (_) => themeCubit.toggleTheme(),
                     ),
                   ),
 
                   const SizedBox(height: 20),
 
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    elevation: 4,
-                    child: ListTile(
-                      leading: const Icon(Icons.logout, color: Colors.red),
-                      title: const Text("Sign Out"),
-                      onTap: () async {
-                        await FirebaseAuth.instance.signOut();
-                        if (context.mounted) {
-                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => SplashPage()), (route) => false);
-                        }
-                      },
-                    ),
+                  _buildCard(
+                    icon: Icons.logout,
+                    iconColor: Colors.red,
+                    title: "Sign Out",
+                    onTap: () async {
+                      await FirebaseAuth.instance.signOut();
+                      if (context.mounted) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => const SplashPage()),
+                          (route) => false,
+                        );
+                      }
+                    },
                   ),
                 ],
               ),
             ),
+    );
+  }
+
+  Widget _buildCard({
+    required IconData icon,
+    required String title,
+    Widget? trailing,
+    VoidCallback? onTap,
+    Color? iconColor,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 4,
+      child: ListTile(
+        leading: Icon(icon, color: iconColor ?? Colors.blue),
+        title: Text(title),
+        trailing: trailing,
+        onTap: onTap,
+      ),
     );
   }
 }

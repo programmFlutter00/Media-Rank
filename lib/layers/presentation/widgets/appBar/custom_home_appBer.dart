@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/presentation/widgets/appBar/appBar_button.dart';
+import 'package:media_rank/layers/presentation/widgets/appBar/appBar_button.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   final bool isFloating; // Stack ichida ishlatayotganda true bo‘ladi

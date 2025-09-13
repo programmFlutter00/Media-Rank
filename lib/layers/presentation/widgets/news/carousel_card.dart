@@ -1,8 +1,8 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:my_anime_hero_list/layers/domain/entities/anime_entity.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/Details/anime_detail_page.dart';
+import 'package:media_rank/layers/domain/entities/anime_entity.dart';
+import 'package:media_rank/layers/presentation/pages/Details/anime_detail_page.dart';
 
 class CarouselCard extends StatelessWidget {
   final AnimeEntity anime;

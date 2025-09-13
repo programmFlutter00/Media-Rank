@@ -2,16 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_anime_hero_list/core/di/di.dart';
-import 'package:my_anime_hero_list/firebase_options.dart';
-import 'package:my_anime_hero_list/layers/application/anime/anime_character/cubit/anime_character_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/anime/anime_current_year/cubit/anime_current_year_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/anime/anime_upcoming/cubit/anime_upcoming_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/auth/cubit/auth_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/character/character_popular/cubit/character_cubit.dart';
-import 'package:my_anime_hero_list/layers/application/theme_cubit.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/splash/splash_page.dart';
-import 'package:my_anime_hero_list/layers/presentation/pages/style/theme.dart';
+import 'package:media_rank/core/di/di.dart';
+import 'package:media_rank/firebase_options.dart';
+import 'package:media_rank/layers/application/anime/anime_character/cubit/anime_character_cubit.dart';
+import 'package:media_rank/layers/application/anime/anime_current_year/cubit/anime_current_year_cubit.dart';
+import 'package:media_rank/layers/application/anime/anime_upcoming/cubit/anime_upcoming_cubit.dart';
+import 'package:media_rank/layers/application/auth/cubit/auth_cubit.dart';
+import 'package:media_rank/layers/application/character/character_popular/cubit/character_cubit.dart';
+import 'package:media_rank/layers/application/theme_cubit.dart';
+import 'package:media_rank/layers/presentation/pages/splash/splash_page.dart';
+import 'package:media_rank/layers/presentation/pages/style/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
