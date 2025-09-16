@@ -9,9 +9,10 @@ class AnimeUsecase {
 
   Future<Either<String, List<AnimeEntity>>> getUpcoming({
     int page = 1,
+    int end = 1,
     int limit = 20,
   }) {
-    return repository.getUpcoming(page: page, limit: limit);
+    return repository.getUpcoming(page: page,end: end, limit: limit);
   }
 
   Future<Either<String, List<AnimeEntity>>> getCurrentYearAnime({

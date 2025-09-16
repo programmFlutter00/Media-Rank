@@ -12,7 +12,7 @@ class CharacterDetailPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('MAHL'),
+        title: Text('MR'),
         // centerTitle: true,
       ),
       body: SingleChildScrollView(

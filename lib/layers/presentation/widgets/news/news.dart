@@ -41,7 +41,7 @@ class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<AnimeUpcomingCubit>()..getUpcoming(page: 1),
+      create: (_) => sl<AnimeUpcomingCubit>()..getUpcoming(page: 1, end: 1),
       child: BlocBuilder<AnimeUpcomingCubit, AnimeUpcomingState>(
         builder: (context, state) {
           if (state.status == AnimeUpcomingStatus.loading) {

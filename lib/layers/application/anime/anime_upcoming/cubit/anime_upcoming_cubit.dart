@@ -9,12 +9,12 @@ class AnimeUpcomingCubit extends Cubit<AnimeUpcomingState> {
   final AnimeUsecase _usecase;
   AnimeUpcomingCubit(this._usecase) : super(const AnimeUpcomingState());
 
-  Future<void> getUpcoming({int page = 1}) async {
+  Future<void> getUpcoming({int page = 1, int end = 3}) async {
     if (page == 1) {
       emit(state.copyWith(status: AnimeUpcomingStatus.loading, error: null));
     }
 
-    final result = await _usecase.getUpcoming(page: page);
+    final result = await _usecase.getUpcoming(page: page, end: end);
 
     result.fold(
       (error) => emit(state.copyWith(status: AnimeUpcomingStatus.failed, error: error)),

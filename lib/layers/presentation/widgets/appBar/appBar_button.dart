@@ -46,7 +46,7 @@ class AppbarButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: IconButton(
-            icon: const Icon(Icons.menu_sharp, color: Colors.black),
+            icon: const Icon(Icons.person, color: Colors.black),
             onPressed: () {
               Scaffold.of(context).openEndDrawer(); // 🔥 Drawer ochiladi
             },

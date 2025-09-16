@@ -18,51 +18,67 @@ class _AdminPageState extends State<AdminPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool _isUploading = false;
 
-  /// Har bir sahifani alohida Cubit orqali olish
-  Future<List<AnimeEntity>> _getAllUpcoming() async {
-    final cubit = sl<AnimeUpcomingCubit>();
-    List<AnimeEntity> allAnime = [];
+  /// 🔹 Barcha upcoming anime’larni olish (1–15 sahifa)
+Future<List<AnimeEntity>> _getAllUpcoming({
+  int startPage = 1,
+  int endPage = 15,
+}) async {
+  final cubit = sl<AnimeUpcomingCubit>();
+  List<AnimeEntity> allAnime = [];
 
-    for (int i = 1; i <= 27; i++) {
-      await cubit.getUpcoming(page: i); // Har bir sahifa alohida yuklanadi
-      final pageAnime = List<AnimeEntity>.from(cubit.state.animeList);
-      allAnime.addAll(pageAnime);
+  // Service ichidagi loop o‘zi page → end orasini aylanadi
+  await cubit.getUpcoming(page: startPage, end: endPage);
+
+  // Service qaytargan natijalarni olish
+  final fetchedAnime = List<AnimeEntity>.from(cubit.state.animeList);
+  allAnime.addAll(fetchedAnime);
+
+  return allAnime;
+}
+
+Future<int?> getNewsCount() async {
+  final query = FirebaseFirestore.instance.collection('news');
+  final aggregateQuery = await query.count().get();
+  debugPrint("Data'lar: ${aggregateQuery.count}");
+  return aggregateQuery
+  .count;
+}
+
+Future<void> _uploadToFirebase() async {
+  setState(() => _isUploading = true);
+
+  try {
+    // Masalan: 1-sahifadan 15-sahifagacha olish
+    final allAnime = await _getAllUpcoming(startPage: 1, endPage: 27);
+
+    final batch = _firestore.batch();
+
+    for (var anime in allAnime) {
+      final firebaseEntity = anime.toFirebaseEntity();
+      final docRef =
+          _firestore.collection('news').doc(firebaseEntity.id.toString());
+      batch.set(docRef, firebaseEntity.toJson());
     }
 
-    return allAnime;
+    await batch.commit();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("✅ ${allAnime.length} ta ma'lumot Firebase'ga yuklandi!")),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Xatolik yuz berdi: $e")),
+    );
+  } finally {
+    setState(() => _isUploading = false);
   }
+}
 
-  /// Firebase'ga batch upload
-  Future<void> _uploadToFirebase() async {
-    setState(() => _isUploading = true);
-
-    try {
-      final allAnime = await _getAllUpcoming();
-
-      final batch = _firestore.batch();
-
-      for (var anime in allAnime) {
-        final firebaseEntity = anime.toFirebaseEntity();
-        final docRef =
-            _firestore.collection('news').doc(firebaseEntity.id.toString());
-        batch.set(docRef, firebaseEntity.toJson());
-      }
-
-      await batch.commit();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content:
-              Text("✅ ${allAnime.length} ta malumot Firebase'ga yuklandi!"),
-        ),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Xatolik yuz berdi: $e")),
-      );
-    } finally {
-      setState(() => _isUploading = false);
-    }
+@override
+  void initState() {
+    getNewsCount();
+    // TODO: implement initState
+    super.initState();
   }
 
   @override

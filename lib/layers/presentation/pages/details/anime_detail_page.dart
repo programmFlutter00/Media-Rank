@@ -15,7 +15,7 @@ class AnimeDetailPage extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text('MAHL'), ),
+      appBar: AppBar(title: Text('MR'), ),
       body: BlocProvider(
         create: (_) => sl<AnimeCharacterCubit>()..getCharacters(anime.malId),
         child: SingleChildScrollView(

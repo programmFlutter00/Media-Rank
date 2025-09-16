@@ -11,9 +11,14 @@ class AnimeRepositoryImpl implements AnimeRepository {
   @override
   Future<Either<String, List<AnimeEntity>>> getUpcoming({
     int page = 1,
+    int end = 3,
     int limit = 20,
   }) async {
-    final result = await _service.getUpcomingAnime(page: page, limit: limit);
+    final result = await _service.getUpcomingAnime(
+      page: page,
+      end: end,
+      limit: limit,
+    );
     return result.fold((l) => Left(l), (r) => Right(r));
   }
 
